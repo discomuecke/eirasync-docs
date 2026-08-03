@@ -1,8 +1,72 @@
 ---
 title: "FAQ"
-description: "Frequently asked questions about EiraSync."
+description: "Frequently asked questions about EiraSync features, billing, privacy, and setup."
 ---
 
 # FAQ
 
-Answers to the most common questions about EiraSync features, billing, and support.
+Answers to the most common questions about EiraSync.
+
+## General
+
+<AccordionGroup>
+  <Accordion title="What is EiraSync?">
+    EiraSync is managed hosting for the official Obsidian Self-hosted LiveSync plugin: private E2EE sync in the EU, without running your own CouchDB server.
+  </Accordion>
+
+  <Accordion title="How do I start?">
+    Sign in with a magic link → 14-day trial (1 vault). Upgrade in the dashboard to monthly (5€) or annual (36€, save 40% / 24€ vs 12× monthly).
+  </Accordion>
+
+  <Accordion title="What happens after the trial?">
+    Without a subscription, write sync later becomes read-only, then purge. Local Markdown in Obsidian stays on your device. No vendor lock-in.
+  </Accordion>
+
+  <Accordion title="Is this an official Obsidian product?">
+    No. EiraSync is an independent hosting provider for the open-source Self-hosted LiveSync plugin.
+  </Accordion>
+</AccordionGroup>
+
+## Billing & Plans
+
+<AccordionGroup>
+  <Accordion title="Monthly vs annual?">
+    Same paid plan (up to 3 vaults, 3 GB, unlimited devices). Annual is 36€/year instead of 12×5€ — about 40% savings (24€).
+  </Accordion>
+
+  <Accordion title="Can I cancel?">
+    Yes, anytime via the Paddle customer portal in the dashboard. Access lasts until the end of the paid period; then the lifecycle applies (later read-only → purge). Local files stay. See our [refund policy](https://eirasync.app/en/refund) for details on withdrawal and refunds.
+  </Accordion>
+
+  <Accordion title="Payment and invoices?">
+    Checkout and invoices run through our payment provider Paddle.com (merchant of record). You manage your subscription and payment methods in the Paddle customer portal. See our [refund policy](https://eirasync.app/en/refund) for details.
+  </Accordion>
+</AccordionGroup>
+
+## Privacy & Security
+
+<AccordionGroup>
+  <Accordion title="Where is my data?">
+    Sync data plane: Hetzner in Germany. Control plane (auth, metadata): Supabase Frankfurt. Vault contents are E2EE — we never see plaintext.
+  </Accordion>
+
+  <Accordion title="How does the encryption work technically (zero-trust)?">
+    LiveSync encrypts your vault directly on your device with a passphrase only you know. Encryption and decryption happen locally in Obsidian — never on our servers. Only ciphertext ever reaches us; we store and sync encrypted data blocks only. That's zero-trust: even with full access to our CouchDB servers, we couldn't read your notes, because we simply don't have the key.
+  </Accordion>
+</AccordionGroup>
+
+## Technical
+
+<AccordionGroup>
+  <Accordion title="Can I sync large files?">
+    LiveSync chunks files. Max ~10 MB per CouchDB document (incl. E2EE overhead). Huge videos belong in object storage — not in the vault.
+  </Accordion>
+
+  <Accordion title="Do I need a special Obsidian plugin?">
+    The official community plugin "Self-hosted LiveSync". No companion plugin needed for the MVP. See the [plugin directory](https://community.obsidian.md/plugins/obsidian-livesync).
+  </Accordion>
+
+  <Accordion title="Why does my vault slowly get bigger during the day?">
+    That's caused by the revisions created for your vault — standard behavior of the CouchDB database. We run compacting (deleting old revisions) once every 24 hours, which shrinks the database again.
+  </Accordion>
+</AccordionGroup>

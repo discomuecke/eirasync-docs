@@ -3,7 +3,9 @@
   "theme": "mint",
   "name": "EiraSync",
   "colors": {
-    "primary": "#C67D10"
+    "primary": "#C67D10",
+    "light": "#C67D10",
+    "dark": "#F0A830"
   },
   "favicon": "/favicon.svg",
   "navigation": {
