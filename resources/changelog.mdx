@@ -5,4 +5,20 @@ description: "Release notes and version history for EiraSync."
 
 # Changelog
 
-Track new features, improvements, and bug fixes across EiraSync releases.
+All updates, improvements, and bug fixes for EiraSync.
+
+## August 2026 — Account & Billing Updates
+
+- **Billing:** Migrated payment provider to Paddle (Merchant of Record). Added a new billing page, subscription status, and lifecycle banners to the dashboard.
+- **Account:** Added self-service account deletion and email preference toggles *(rolling out)*.
+- **Internationalization:** The dashboard is now fully available in both English and German.
+- **Onboarding:** Redesigned the setup-URI flow in the dashboard and linked it to the illustrated Quick Start guide.
+
+## August 2026 — MVP Launch
+
+EiraSync is officially live. The initial release includes our complete zero-knowledge setup for Obsidian LiveSync.
+
+- **Infrastructure & Security:** E2EE CouchDB hosting on the Hetzner data plane (Germany). Includes automated, encrypted nightly offsite backups.
+- **Vault Management:** Self-service dashboard for creating, managing, and deleting vaults, including storage usage monitoring.
+- **Subscriptions:** 14-day trial (no credit card, 1 vault, 3 GB). Seamless conversion to paid plans (up to 3 vaults).
+- **Data Lifecycle:** Automated 30-day "read-only" mode after cancellation or expiry, followed by a strict data purge.
