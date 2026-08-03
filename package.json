@@ -1,0 +1,7 @@
+{
+  "name": "eirasync-docs",
+  "private": true,
+  "scripts": {
+    "docs:dev": "npx mintlify dev"
+  }
+}

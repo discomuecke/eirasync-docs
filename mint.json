@@ -1,0 +1,60 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "EiraSync",
+  "favicon": "/favicon.svg",
+  "theme": "quill",
+  "colors": {
+    "primary": "#C67D10",
+    "light": "#C67D10",
+    "dark": "#E8A830"
+  },
+  "background": {
+    "color": {
+      "light": "#F5F4F1",
+      "dark": "#181614"
+    }
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "getting-started/quick-start",
+        "getting-started/add-device"
+      ]
+    },
+    {
+      "group": "Migration Guides",
+      "pages": [
+        "migration-guides/from-icloud",
+        "migration-guides/from-obsidian-sync",
+        "migration-guides/from-self-hosted"
+      ]
+    },
+    {
+      "group": "Troubleshooting",
+      "pages": [
+        "troubleshooting/connection-failed",
+        "troubleshooting/sync-conflicts",
+        "troubleshooting/reset-database"
+      ]
+    },
+    {
+      "group": "Security & Architecture",
+      "pages": [
+        "security-architecture/zero-knowledge",
+        "security-architecture/infrastructure"
+      ]
+    },
+    {
+      "group": "Resources",
+      "pages": [
+        "resources/faq",
+        "resources/changelog"
+      ]
+    }
+  ]
+}

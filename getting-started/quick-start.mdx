@@ -1,0 +1,121 @@
+---
+title: "Setup-Tutorial"
+description: "Schritt für Schritt: EiraSync mit Obsidian verbinden — ohne Technik-Jargon."
+---
+
+`## setup`
+
+# Setup-Tutorial
+
+Obsidian mit EiraSync verbinden — in wenigen Schritten.
+
+<Info>
+  Setup-Link aus dem Dashboard kopieren, LiveSync-Plugin installieren, Link einfügen — fertig. Folge die Abschnitte der Reihe nach.
+</Info>
+
+## 1. Setup-Link holen
+
+### Im EiraSync-Dashboard
+
+Melde dich an, öffne deinen Vault und klicke **„Neuen Setup-Link erzeugen"**.
+
+Kopiere Setup-Link und URI-Passphrase — du brauchst beides gleich in Obsidian.
+
+<Tip>
+  Link und Passphrase jetzt speichern. **„Neu erzeugen"** trennt alle Geräte.
+</Tip>
+
+## 2. LiveSync-Plugin installieren
+
+Installiere [Self-hosted LiveSync](https://community.obsidian.md/plugins/obsidian-livesync) — das offizielle Community-Plugin für Obsidian (Autor: vrtmrz).
+
+### In Obsidian installieren & aktivieren
+
+1. **Einstellungen → Community plugins → Browse** → „LiveSync" suchen.
+2. **„Self-hosted LiveSync"** installieren und mit **„Enable"** aktivieren — [Plugin-Seite](https://community.obsidian.md/plugins/obsidian-livesync). Am Handy läuft es genauso.
+
+<Frame caption="Desktop — Autor: vrtmrz">
+  <img src="https://eirasync.app/setup-tutorial/desktop-plugin-search.png" alt="Self-hosted LiveSync im Plugin-Browser" />
+</Frame>
+
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+  <Frame caption="Desktop — „Enable" klicken">
+    <img src="https://eirasync.app/setup-tutorial/desktop-plugin-enable.png" alt="Plugin aktivieren" />
+  </Frame>
+  <Frame caption="Handy — gleicher Ablauf">
+    <img src="https://eirasync.app/setup-tutorial/mobile-plugin-search.png" alt="LiveSync auf dem Handy suchen" />
+  </Frame>
+</div>
+
+## 3. Erstes Gerät einrichten
+
+### Assistent durchlaufen
+
+1. **„I am setting this up for the first time"** wählen.
+2. Als Verbindungsweg **„Use a Setup URI"** belassen und fortfahren.
+
+<Frame>
+  <img src="https://eirasync.app/setup-tutorial/desktop-device-a-setup-uri.png" alt="Setup URI als Verbindungsweg" />
+</Frame>
+
+### Link und Passphrase einfügen
+
+1. Setup-Link und URI-Passphrase aus EiraSync einfügen → **„Test Settings and Continue"**.
+2. Bei der Frage zum Hochladen: **„Yes"** — deine Notizen gehen in die Cloud.
+
+<Frame>
+  <img src="https://eirasync.app/setup-tutorial/desktop-device-a-enter-uri.png" alt="Setup-URI und Passphrase eingeben" />
+</Frame>
+
+## 4. Weiteres Gerät hinzufügen
+
+Gleicher Setup-Link wie auf Gerät 1 — keinen neuen im Dashboard erzeugen.
+
+### Zweiter Computer
+
+1. LiveSync installieren, im Assistenten **„adding a device to an existing setup"** wählen.
+2. Denselben Setup-Link und dieselbe Passphrase einfügen. Beim Hochladen: **„No"**.
+
+### Handy per QR-Code
+
+1. [Self-hosted LiveSync](https://community.obsidian.md/plugins/obsidian-livesync) installieren, **„adding a device to an existing setup"** wählen, dann **„Scan a QR Code"**.
+2. Am ersten Gerät: **Einstellungen → Self-hosted LiveSync → Tab „Setup" → „Show QR code" → „For your eyes only"**.
+3. QR-Code mit dem Handy scannen, Passphrase eingeben.
+
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+  <Frame caption="Handy — „adding a device" wählen">
+    <img src="https://eirasync.app/setup-tutorial/mobile-add-device.png" alt="Handy: Weiteres Gerät hinzufügen" />
+  </Frame>
+  <Frame caption="Computer — Tab „Setup" → „Show QR code"">
+    <img src="https://eirasync.app/setup-tutorial/desktop-qr-settings.png" alt="Am Computer: QR-Code-Einstellungen" />
+  </Frame>
+</div>
+
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+  <Frame caption="Handy — „Scan a QR Code" wählen">
+    <img src="https://eirasync.app/setup-tutorial/mobile-scan-qr-select.png" alt="Handy: QR-Code scannen wählen" />
+  </Frame>
+  <Frame caption="Computer — „For your eyes only" antippen">
+    <img src="https://eirasync.app/setup-tutorial/desktop-qr-reveal.png" alt="Am Computer: QR-Code anzeigen" />
+  </Frame>
+</div>
+
+---
+
+## Super — du hast es geschafft!
+
+Deine Notizen synchronisieren sich jetzt zwischen deinen Geräten. Im [Dashboard](https://eirasync.app/dashboard) siehst du jederzeit den Status deines Vaults.
+
+## Gut zu wissen
+
+### Zero-Knowledge-Architektur
+
+Deine Notizen werden auf deinem Gerät verschlüsselt, bevor sie den Server erreichen. EiraSync speichert nur verschlüsselte Daten — wir können deine Notizen nicht lesen, auch wenn wir wollten. Nur du hast den Schlüssel.
+
+### Ein Link für alle Geräte
+
+Desktop und Handy nutzen denselben Setup-Link.
+
+### „Not a server admin"
+
+Kannst du ignorieren — ist bei deinem privaten Vault normal.
