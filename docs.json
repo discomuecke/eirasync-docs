@@ -22,7 +22,8 @@
           "migration-guides/from-icloud",
           "migration-guides/from-obsidian-sync",
           "migration-guides/from-self-hosted"
-        ]
+        ],
+        "hidden": true
       },
       {
         "group": "Troubleshooting",
@@ -30,14 +31,16 @@
           "troubleshooting/connection-failed",
           "troubleshooting/sync-conflicts",
           "troubleshooting/reset-database"
-        ]
+        ],
+        "hidden": true
       },
       {
         "group": "Security & Architecture",
         "pages": [
           "security-architecture/zero-knowledge",
           "security-architecture/infrastructure"
-        ]
+        ],
+        "hidden": true
       },
       {
         "group": "Resources",
