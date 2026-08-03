@@ -65,5 +65,8 @@
   },
   "appearance": {
     "strict": false
+  },
+  "seo": {
+    "indexing": "navigable"
   }
 }
