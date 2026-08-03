@@ -7,37 +7,29 @@ description: "Release notes and version history for EiraSync."
 
 All notable changes to EiraSync.
 
-## August 2026
+## August 2026 — Account, Billing & Onboarding
 
 ### Added
 
-- Paddle.com Market Ltd. added as Merchant of Record for billing and subscription management.
-- New billing page with subscription status and lifecycle banners.
-- Self-service account deletion.
-- Email preference settings.
-- German dashboard translation (full i18n support alongside English).
-- Redesigned setup URI onboarding flow, linked directly to the illustrated Quick Start guide.
-
-### Changed
-
-- Improved onboarding experience.
-- Updated account management and subscription handling.
+- **Billing Infrastructure:** Paddle.com Market Ltd. added as Merchant of Record for subscription management.
+- **Billing UI:** New dashboard page featuring subscription status and lifecycle banners.
+- **Account Management:** Introduced self-service account deletion and email preference settings.
+- **Localization:** Dashboard is now fully translated into German (full i18n support alongside English).
+- **Onboarding:** Redesigned the setup URI flow, linking directly to the illustrated Quick Start guide.
 
 ---
 
-## August 2026 — Initial Release
+## August 2026 — MVP Launch
 
 ### Added
 
-- Initial public release of EiraSync.
-- Managed CouchDB hosting for Obsidian LiveSync, hosted exclusively in the EU (Germany, via Hetzner).
-- End-to-end, zero-knowledge encrypted synchronization — encryption keys never leave your devices.
-- Vault management dashboard, including creation, deletion, and storage usage monitoring.
-- Automated, encrypted nightly off-site backups.
-- 14-day free trial (no credit card required, 1 vault, 3 GB storage).
-- Paid plans with support for up to three vaults.
-- Automatic read-only mode for 30 days after subscription cancellation or expiry.
-- Automatic, permanent data deletion after the read-only retention period.
+- **Public Release:** Initial public launch of EiraSync.
+- **Infrastructure:** Managed CouchDB hosting for Obsidian LiveSync, hosted exclusively in the EU (Germany, via Hetzner).
+- **Security:** End-to-end, zero-knowledge encrypted synchronization (encryption keys never leave your devices).
+- **Vault Management:** Dashboard for vault creation, deletion, and storage usage monitoring.
+- **Data Protection:** Automated, encrypted nightly off-site backups.
+- **Plans:** 14-day free trial (no credit card required, 1 vault, 3 GB storage) and paid plans supporting up to three vaults.
+- **Data Lifecycle:** Automatic read-only mode for 30 days after subscription cancellation or expiry, followed by permanent data deletion.
 
 ---
 
@@ -45,8 +37,7 @@ All notable changes to EiraSync.
 
 ### Added
 
-- Initial dual-plane architecture: Supabase control plane, Hetzner CouchDB data plane.
-- Managed CouchDB infrastructure setup and validation.
-- First successful connection between the Obsidian LiveSync plugin and the managed backend.
-- End-to-end encryption data flow verified to confirm the zero-knowledge design in practice.
-- Passwordless authentication via Magic Link, implemented through Cloudflare Workers.
+- **Architecture:** Initial dual-plane setup deployed (Supabase control plane, Hetzner CouchDB data plane).
+- **Core Sync:** Managed CouchDB infrastructure validated with the first successful connection to the Obsidian LiveSync plugin.
+- **Zero-Knowledge:** End-to-end encryption data flow verified in practice.
+- **Authentication:** Passwordless authentication via Magic Link implemented through Cloudflare Workers.
