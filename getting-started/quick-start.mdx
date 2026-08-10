@@ -13,12 +13,12 @@ Connect Obsidian to EiraSync — in a few steps.
 
 ### In the EiraSync dashboard
 
-Sign in, open your vault, and click **"Generate new setup link"**.
+Sign in and create a vault. The setup dialog opens automatically — copy the setup link and Setup URI passphrase.
 
-Copy the setup link and URI passphrase — you will need both in Obsidian.
+EiraSync generates two separate passphrases: the **Setup URI passphrase** (shown in the dashboard) and an **E2EE passphrase** for your vault contents (embedded in the encrypted setup link). You only enter the Setup URI passphrase in Obsidian.
 
 <Tip>
-  Save them now. **"Regenerate"** disconnects all devices.
+  Save them now. **Regenerate** is a full credential rotation — it disconnects all devices and creates new passphrases. Do not use it to add another device.
 </Tip>
 
 ## 2. Install the LiveSync plugin
@@ -55,7 +55,7 @@ Install [Self-hosted LiveSync](https://community.obsidian.md/plugins/obsidian-li
 
 ### Paste link and passphrase
 
-1. Paste setup link and URI passphrase from EiraSync → **"Test Settings and Continue"**.
+1. Paste setup link and Setup URI passphrase from EiraSync → **"Test Settings and Continue"**.
 2. When asked about uploading: **"Yes"** — your notes go to the cloud.
 
 <Frame>
@@ -64,18 +64,18 @@ Install [Self-hosted LiveSync](https://community.obsidian.md/plugins/obsidian-li
 
 ## 4. Add another device
 
-Same setup link as device 1 — do not generate a new one in the dashboard.
+Same setup link as device 1 — do not generate a new one in the dashboard. See [Add Device](/getting-started/add-device) for details.
 
 ### Second computer
 
 1. Install LiveSync, choose **"adding a device to an existing setup"** in the wizard.
-2. Paste the same setup link and passphrase. When asked about uploading: **"No"**.
+2. Paste the same setup link and Setup URI passphrase. When asked about uploading: **"No"**.
 
 ### Phone via QR code
 
 1. [Self-hosted LiveSync](https://community.obsidian.md/plugins/obsidian-livesync) install, choose **"adding a device to an existing setup"**, then **"Scan a QR Code"**.
 2. On your first device: **Settings → Self-hosted LiveSync → "Setup" tab → "Show QR code" → "For your eyes only"**.
-3. Scan the QR code with your phone, enter the passphrase.
+3. Scan the QR code with your phone, enter the Setup URI passphrase.
 
 <Frame caption='Phone — choose "adding a device"'>
   ![Phone: add another device](https://eirasync.app/setup-tutorial/mobile-add-device.png)
@@ -103,7 +103,7 @@ Your notes now sync across your devices. Check the [dashboard](https://eirasync.
 
 ### Zero-knowledge architecture
 
-Your notes are encrypted on your device before they reach the server. EiraSync only stores encrypted data — we cannot read your notes, even if we wanted to. Only you hold the key.
+Your notes are encrypted on your device before they reach the server. EiraSync never stores your E2EE passphrase.
 
 ### One link for all devices
 

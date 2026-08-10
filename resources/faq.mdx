@@ -1,72 +1,101 @@
 ---
 title: "FAQ"
-description: "Frequently asked questions about EiraSync features, billing, privacy, and setup."
+description: "Answers to the most common questions about EiraSync's architecture, security, and usage."
 ---
 
-# FAQ
+## 🔐 Privacy & Security
 
-Answers to the most common questions about EiraSync.
+**What exactly does EiraSync know?**
+We believe in technical transparency over marketing promises. Here is exactly what our infrastructure has access to:
 
-## General
+| EiraSync knows | EiraSync does NOT know |
+| :--- | :--- |
+| Account email | Vault contents |
+| Vault ID (`v_...`) | Markdown plaintext |
+| Storage usage | E2EE passphrase |
+| Subscription status | The contents of encrypted documents |
+| Sync/account metadata | Your notes |
 
-<AccordionGroup>
-  <Accordion title="What is EiraSync?">
-    EiraSync is managed hosting for the official Obsidian Self-hosted LiveSync plugin: private E2EE sync in the EU, without running your own CouchDB server.
-  </Accordion>
+**Can EiraSync read my notes?**
+No. LiveSync performs end-to-end encryption (E2EE) on your device before synchronized data is sent to EiraSync. EiraSync does not receive the E2EE passphrase required to decrypt your vault data, so the service cannot decrypt the encrypted vault contents using information stored in your account.
 
-  <Accordion title="How do I start?">
-    Sign in with a magic link → 14-day trial (1 vault). Upgrade in the dashboard to monthly (5€) or annual (36€, save 40% / 24€ vs 12× monthly).
-  </Accordion>
+**How does the encryption work technically?**
+LiveSync encrypts your vault directly on your device with a passphrase only you know. Encryption and decryption happen locally in Obsidian — never on our servers. Only ciphertext ever reaches us; we store and sync encrypted data blocks only.
 
-  <Accordion title="What happens after the trial?">
-    Without a subscription, write sync later becomes read-only, then purge. Local Markdown in Obsidian stays on your device. No vendor lock-in.
-  </Accordion>
+**What is the difference between the Setup URI passphrase and the E2EE passphrase?**
+* The **Setup URI passphrase** protects the `obsidian://setuplivesync...` link containing the connection settings required to configure the LiveSync plugin.
+* The **E2EE passphrase** protects your synchronized vault data. LiveSync uses it as input for the encryption and decryption process on your devices.
 
-  <Accordion title="Is this an official Obsidian product?">
-    No. EiraSync is an independent hosting provider for the open-source Self-hosted LiveSync plugin.
-  </Accordion>
-</AccordionGroup>
+Neither of these passphrases can be recovered by EiraSync.
 
-## Billing & Plans
+**What happens if I lose my E2EE passphrase?**
+Your E2EE passphrase is not stored by EiraSync. If you lose it, EiraSync cannot recover it for you, and we cannot decrypt your existing encrypted vault data on your behalf. Keep your passphrase in a secure password manager.
 
-<AccordionGroup>
-  <Accordion title="Monthly vs annual?">
-    Same paid plan (up to 3 vaults, 3 GB, unlimited devices). Annual is 36€/year instead of 12×5€ — about 40% savings (24€).
-  </Accordion>
+**Where is my data stored?**
+EiraSync separates account management from synchronization infrastructure. The sync data plane runs on dedicated Hetzner infrastructure in Germany. The control plane (authentication, account data, and billing metadata) runs separately on Supabase in Frankfurt (eu-central-1). This limits the scope of each system and ensures the control plane does not need access to your vault data.
 
-  <Accordion title="Can I cancel?">
-    Yes, anytime via the Paddle customer portal in the dashboard. Access lasts until the end of the paid period; then the lifecycle applies (later read-only → purge). Local files stay. See our [refund policy](https://eirasync.app/en/refund) for details on withdrawal and refunds.
-  </Accordion>
+---
 
-  <Accordion title="Payment and invoices?">
-    Checkout and invoices run through our payment provider Paddle.com (merchant of record). You manage your subscription and payment methods in the Paddle customer portal. See our [refund policy](https://eirasync.app/en/refund) for details.
-  </Accordion>
-</AccordionGroup>
+## ⚙️ Architecture & Technology
 
-## Privacy & Security
+**What exactly is the Setup URI?**
+EiraSync generates an encrypted `obsidian://setuplivesync...` link containing the connection settings required to configure the LiveSync plugin. This eliminates the need to manually configure CouchDB credentials and database names.
 
-<AccordionGroup>
-  <Accordion title="Where is my data?">
-    Sync data plane: Hetzner in Germany. Control plane (auth, metadata): Supabase Frankfurt. Vault contents are E2EE — we never see plaintext.
-  </Accordion>
+**Does every vault have its own database?**
+Yes. Each vault is provisioned as a separate CouchDB database (e.g., `v_abc123`) with its own database credentials and access permissions. A user's CouchDB credentials are strictly restricted to their specific vault database.
 
-  <Accordion title="How does the encryption work technically (zero-trust)?">
-    LiveSync encrypts your vault directly on your device with a passphrase only you know. Encryption and decryption happen locally in Obsidian — never on our servers. Only ciphertext ever reaches us; we store and sync encrypted data blocks only. That's zero-trust: even with full access to our CouchDB servers, we couldn't read your notes, because we simply don't have the key.
-  </Accordion>
-</AccordionGroup>
+**Are there any sync limits?**
+EiraSync applies infrastructure-level safeguards to prevent abusive or accidental request bursts. These limits are designed to be invisible during normal LiveSync usage, including initial vault synchronization.
+EiraSync currently limits individual CouchDB documents to approximately 10 MB, including encryption overhead. LiveSync automatically chunks larger files into smaller pieces, so this normally does not affect ordinary notes and attachments. For very large binary files, dedicated object storage may be more appropriate than storing them directly in a sync vault.
 
-## Technical
+**Why does my vault slowly get bigger during the day?**
+CouchDB keeps document revisions, so the physical database size can temporarily grow even when the logical amount of data in your vault has not changed. EiraSync automatically performs database compaction on a scheduled basis to reclaim storage from obsolete revisions.
 
-<AccordionGroup>
-  <Accordion title="Can I sync large files?">
-    LiveSync chunks files. Max ~10 MB per CouchDB document (incl. E2EE overhead). Huge videos belong in object storage — not in the vault.
-  </Accordion>
+---
 
-  <Accordion title="Do I need a special Obsidian plugin?">
-    The official community plugin "Self-hosted LiveSync". No companion plugin needed for the MVP. See the [plugin directory](https://community.obsidian.md/plugins/obsidian-livesync).
-  </Accordion>
+## 🔄 LiveSync & Usage
 
-  <Accordion title="Why does my vault slowly get bigger during the day?">
-    That's caused by the revisions created for your vault — standard behavior of the CouchDB database. We run compacting (deleting old revisions) once every 24 hours, which shrinks the database again.
-  </Accordion>
-</AccordionGroup>
+**Does EiraSync replace LiveSync or Obsidian Sync?**
+EiraSync does not replace Obsidian or the LiveSync plugin. EiraSync provides the managed CouchDB infrastructure used by the open-source "Self-hosted LiveSync" community plugin. We are an independent hosting provider and not an official Obsidian product.
+
+**Can I use EiraSync without giving EiraSync access to my Obsidian account?**
+Yes. EiraSync does not require access to your Obsidian account. It works with the open-source Self-hosted LiveSync plugin installed locally in Obsidian.
+
+**Can I migrate an existing LiveSync vault?**
+Yes. If your notes are already stored locally in Obsidian, you can connect that vault to EiraSync and initialize the new EiraSync backend from it. If you are migrating from an existing remote LiveSync/CouchDB installation, we highly recommend creating a local backup first and following the plugin's official migration path rather than blindly replacing the remote database.
+
+**Why do I sometimes see a "401 Unauthorized" error?**
+Some LiveSync maintenance or administrative operations require permissions that EiraSync deliberately does not grant to individual vault credentials. These operations may therefore return `401 Unauthorized`. This does not mean that your normal synchronization credentials are invalid. If ordinary synchronization is working, the error can usually be ignored.
+
+**What happens if I reset/rotate my vault credentials in the dashboard?**
+Resetting your vault credentials triggers a **complete credential reset**. Because we never store your E2EE passphrase, our system cannot embed your old passphrase into a new link. Instead, it generates a new CouchDB password *and* a completely new E2EE passphrase.
+**Warning:** If you import this new link, your device will use the new key and fail to decrypt the existing data in your remote vault (resulting in an HKDF decryption error). You should only use this feature if your credentials are compromised. To add another device to a working vault, do not reset your credentials in the dashboard; instead, generate an invite link directly from an already connected device via the LiveSync plugin settings.
+
+---
+
+## 🛡️ Reliability & Ownership
+
+**How are backups protected?**
+We run automated backups locally (7 days) and offsite to a Hetzner Storage Box (30 days). These backups contain the same encrypted LiveSync data stored by the service. Because EiraSync does not store your E2EE passphrase, the encrypted vault contents in these backups cannot be decrypted by EiraSync using credentials or secrets stored in the service.
+
+**What happens if EiraSync goes offline?**
+Your local Obsidian vault always remains available on your devices. EiraSync is used strictly for synchronization between devices; it does not replace the local Markdown copy of your vault on your hard drive.
+
+**Can I leave EiraSync at any time?**
+Yes. EiraSync does not use a proprietary vault format or client. Your notes remain standard Obsidian files on your devices. You can stop using EiraSync and move to another LiveSync backend or another synchronization method at any time. We recommend creating a local backup before migrating.
+
+**What happens after the trial?**
+If your trial or subscription ends, your EiraSync vault enters a read-only state for synchronization. Your local Obsidian vault remains fully writable. After a 30-day grace period, the remote vault is permanently purged from our servers.
+
+---
+
+## 💳 Billing & Plans
+
+**Monthly vs annual?**
+Both paid plans offer the exact same features (up to 3 vaults, 3 GB storage, unlimited devices). The annual plan is billed at 36 €/year instead of 60 €/year on the monthly plan.
+
+**Can I cancel?**
+Yes, anytime via the Paddle customer portal in the dashboard. Your access lasts until the end of your paid period; then the standard lifecycle applies (read-only, then purge). See our [refund policy](https://eirasync.app/refund) for details on withdrawal and refunds.
+
+**Payment and invoices?**
+Checkout and invoices run securely through our payment provider Paddle.com (acting as the merchant of record). You can manage your subscription, download invoices, and update payment methods directly in the Paddle customer portal within your dashboard.

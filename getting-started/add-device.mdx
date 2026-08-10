@@ -4,6 +4,14 @@ description: "Connect a new device to your EiraSync account."
 hidden: true
 ---
 
-# Add Device
+Do not generate a new Setup URI in your EiraSync dashboard to add a second device. This will reset your credentials — including your CouchDB password and E2EE passphrase — and disconnect every device already connected to the vault.
 
-Learn how to link an additional device to your existing EiraSync vault and keep your notes in sync.
+Instead, open the [Self-hosted LiveSync](https://github.com/vrtmrz/obsidian-livesync) plugin settings on your **already connected device** and use the built-in feature to copy or display a Setup URI for your new device:
+
+1. On your first device: **Settings → Self-hosted LiveSync → Setup tab → Show QR code** (or copy the Setup URI).
+2. On the new device: install LiveSync, choose **adding a device to an existing setup**, then paste the link or scan the QR code.
+3. When asked about uploading local notes, choose **No** — fetch from the server instead.
+
+If you still have the original setup link and Setup URI passphrase from your dashboard, you can paste that on the new device instead. Use the **same** link on every device — never generate a new one in the dashboard unless your credentials are compromised.
+
+For the full walkthrough with screenshots, see the [Setup tutorial](/getting-started/quick-start#4-add-another-device).
